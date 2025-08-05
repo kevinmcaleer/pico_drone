@@ -3,7 +3,7 @@ from machine import UART
 import time
 
 # === Adjust UART pin numbers below to match your board and wiring ===
-uart = UART(0, baudrate=9600, tx=0, rx=1)  # For ESP32
+uart = UART(1, baudrate=9600, tx=4, rx=5)  # For ESP32
 # uart = UART(1, baudrate=9600, tx=4, rx=5)  # For Raspberry Pi Pico
 
 gps = MicropyGPS(location_formatting='dd')
