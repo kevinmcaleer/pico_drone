@@ -3,7 +3,10 @@
 Main flight computer module for the Pico Drone project.
 Integrates IMU, Magnetometer, and GPS modules for sensor fusion and control.
 """
-from machine import I2C, UART, Pin
+try:
+      from machine import I2C, UART, Pin
+except ImportError:
+      from mock_machine import I2C, UART, Pin
 import time
 from imu_gy91 import IMUGY91
 from mag_gy273 import MagnetometerGY273

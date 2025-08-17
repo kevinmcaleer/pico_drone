@@ -8,6 +8,9 @@ class DummyI2C:
     def writeto_mem(self, *args, **kwargs):
         pass
     def readfrom_mem(self, addr, reg, n):
+        # Return 3 bytes for BMP280 registers, else 2 bytes
+        if n == 3:
+            return bytes([0, 0, 0])
         return bytes([0, 0] * (n // 2))
 class DummyUART:
     def any(self):

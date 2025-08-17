@@ -2,7 +2,10 @@
 """
 Module for interfacing with the GY-273 magnetometer sensor on the Raspberry Pi Pico 2W using MicroPython.
 """
-from machine import I2C
+try:
+    from machine import I2C
+except ImportError:
+    from mock_machine import I2C
 
 MAG_ADDR = 0x1E  # Example address for HMC5883L (GY-273)
 

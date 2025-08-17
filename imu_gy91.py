@@ -2,7 +2,10 @@
 """
 Module for interfacing with the GY-91 IMU sensor (accelerometer, gyroscope, barometer) on the Raspberry Pi Pico 2W using MicroPython.
 """
-from machine import I2C
+try:
+    from machine import I2C, Pin
+except ImportError:
+    from mock_machine import I2C, Pin
 import math
 
 MPU_ADDR = 0x68
