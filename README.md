@@ -24,6 +24,7 @@ This project is building a MicroPython-powered flight computer for a drone using
 - `design/` — Design documentation
 - `archive/` — Early experiments and legacy scripts
 - `scripts/` — Shell scripts for deployment and GitHub automation
+- `drv8833.py` — DRV8833 motor driver module
 - `gamepad.py`, `ssd1306.py` — Bluetooth gamepad and OLED display drivers for Pico
 
 
@@ -34,13 +35,13 @@ This project is building a MicroPython-powered flight computer for a drone using
 - [x] Epic and feature breakdown for IMU, Magnetometer, and GPS
 - [x] User stories and test skeletons for each feature
 - [x] CLI script to add all epics, features, and stories as GitHub issues with correct labels
-- [x] Modular sensor drivers for IMU (GY-91), Magnetometer (GY-273), and GPS (NEO-6M)
+- [x] Modular sensor drivers for IMU (GY-91), Magnetometer (GY-273), GPS (NEO-6M), and DRV8833 motor driver
 - [x] Main flight computer integration with async event loop
 - [x] Bluetooth gamepad and OLED display support
 - [x] Cross-platform local testing with mocks
 - [x] Automated deployment and issue management scripts
 - [x] **All GPS and most IMU/Magnetometer features and stories completed and closed**
-- [ ] Remaining: Final review of error handling for IMU and Magnetometer, and close Epic when all features are complete
+- [ ] Remaining: Final review of error handling for IMU and Magnetometer, motor control integration in flight computer, and close Epic when all features are complete
 
 
 
