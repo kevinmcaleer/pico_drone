@@ -29,4 +29,4 @@ We will build a flight computer for our drone using a Raspberry Pi Pico 2W. The 
 
 ---
 
-This epic will be broken down into features and user stories in subsequent documentation.
+This epic has been broken down into features and user stories, most of which are now complete and closed. See README and GitHub issues for current status.
