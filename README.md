@@ -43,6 +43,40 @@ This project is building a MicroPython-powered flight computer for a drone using
 - [x] **All GPS and most IMU/Magnetometer features and stories completed and closed**
 - [ ] Remaining: Final review of error handling for IMU and Magnetometer, motor control integration in flight computer, and close Epic when all features are complete
 
+## Test Coverage & Safety Verification
+
+### Current Automated Tests
+- IMU: accel, gyro, barometer reads; orientation output type
+- Magnetometer: raw XYZ read; heading calculation
+- GPS: GPGGA parsing, malformed sentence handling, UART failure retries
+- Motor Driver: forward, reverse, brake, coast (digital + PWM)
+- Integration skeleton: multi-sensor instantiation & data structure checks
+
+### Gaps / Planned Tests
+- Full async flight loop timing & concurrency
+- Motor control integration & throttle mapping
+- Failsafe logic (sensor/gamepad/GPS loss)
+- Gamepad input mapping & disconnect recovery
+- Arming/disarming & motor lockout on fault
+- Hardware-in-the-loop / simulation harness
+
+### Recommended Safety Mechanisms
+- Pre-flight self-test (sensor presence, data freshness)
+- Watchdog / loop overrun detection
+- Plausibility checks (spike filtering, heading jump thresholds)
+- Immediate motor brake/coast on critical fault or control loss
+- Input rate limiting & smoothing
+- Structured logging / telemetry for post-flight analysis
+
+### Manual Verification Checklist
+1. Bench run (no props) observe sensor update cadence
+2. Simulate gamepad disconnect: motors stop/failsafe engages
+3. Block GPS input: system continues without crash
+4. Inject mock sensor exception: loop continues, fault logged
+
+### Disclaimer
+Current tests validate core modules but are insufficient alone for safe flight. Complete planned tests and bench validation before powered flight.
+
 
 
 ## How to Use
@@ -55,9 +89,9 @@ This project is building a MicroPython-powered flight computer for a drone using
 1. Connect your Raspberry Pi Pico to your computer and mount it (it should appear as a USB drive, e.g., `/media/$USER/RPI-RP2` on Linux, or a similar path on macOS/Windows).
 2. Run the deployment script:
 
-  ```sh
-  scripts/deploy_to_pico.sh <PICO_MOUNT_PATH>
-  ```
+```sh
+scripts/deploy_to_pico.sh <PICO_MOUNT_PATH>
+```
   Replace `<PICO_MOUNT_PATH>` with the actual mount path of your Pico. If omitted, the script will try a default path.
 3. This will copy all required files (`flight_computer.py`, `imu_gy91.py`, `mag_gy273.py`, `gps_neo6m.py`, `gamepad.py`, `ssd1306.py`) to your Pico.
 4. Eject/unmount the Pico and reboot it to run the flight computer.
