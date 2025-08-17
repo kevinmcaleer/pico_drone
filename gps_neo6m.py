@@ -50,11 +50,25 @@ class GPSNEO6M:
             val = -val
         return val
 
-    def get_location(self):
-        while True:
-            sentence = self.read_sentence()
-            if sentence and sentence.startswith('$GPGGA'):
-                data = self.parse_gpgga(sentence)
-                if data:
-                    return data
+    def get_location(self, max_attempts=50, logger=None):
+        """
+        Try to get a valid GPS location, handling errors gracefully.
+        Returns location dict or None if not found after max_attempts.
+        Logs errors if logger is provided.
+        """
+        attempts = 0
+        while attempts < max_attempts:
+            try:
+                sentence = self.read_sentence()
+                if sentence and sentence.startswith('$GPGGA'):
+                    data = self.parse_gpgga(sentence)
+                    if data:
+                        return data
+            except Exception as e:
+                if logger:
+                    logger(f"GPS read error: {e}")
+            attempts += 1
             time.sleep(0.1)
+        if logger:
+            logger(f"GPS: No valid location after {max_attempts} attempts.")
+        return None
