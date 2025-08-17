@@ -1,29 +1,28 @@
+# Test for IMU GY-91 module
 import unittest
-from machine import I2C, Pin
+from imu_gy91 import IMUGY91
 
-# Mock or actual implementation import
-# from imu_gy91 import read_word, Madgwick
+class DummyI2C:
+    def writeto_mem(self, *args, **kwargs):
+        pass
+    def readfrom_mem(self, addr, reg, n):
+        return bytes([0, 0] * (n // 2))
 
 class TestIMUGY91(unittest.TestCase):
     def setUp(self):
-        # Setup code for I2C and sensor mocks if needed
-        pass
-
-    def test_read_word(self):
-        # Test reading a word from the IMU (mocked)
-        # self.assertEqual(read_word(...), expected_value)
-        pass
-
-    def test_madgwick_update(self):
-        # Test Madgwick filter update with sample data
-        # madgwick = Madgwick()
-        # madgwick.update(...)
-        # self.assertAlmostEqual(...)
-        pass
-
-    def test_sensor_error_handling(self):
-        # Test error handling when sensor is not connected
-        pass
+        self.imu = IMUGY91(DummyI2C())
+    def test_read_accel(self):
+        ax, ay, az = self.imu.read_accel()
+        self.assertIsInstance(ax, float)
+    def test_read_gyro(self):
+        gx, gy, gz = self.imu.read_gyro()
+        self.assertIsInstance(gx, float)
+    def test_read_bmp280(self):
+        temp, press = self.imu.read_bmp280()
+        self.assertIsInstance(temp, float)
+    def test_orientation(self):
+        pitch, roll = self.imu.get_orientation(0.01)
+        self.assertIsInstance(pitch, float)
 
 if __name__ == "__main__":
     unittest.main()
