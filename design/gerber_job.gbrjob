@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2025-08-12T15:15:59Z",
+        "GenerationSoftware": {
+            "Application": "Fusion Electronics",
+            "Vendor": "Autodesk",
+            "Version": "9.7.0"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.6608,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "Drone PCB v19"
+        },
+        "Owner": "Kevin Mcaleer <kevinmcaleer@icloud.com>",
+        "Size": {
+            "X": 173.514719,
+            "Y": 173.514719
+        }
+    }
+}

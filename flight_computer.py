@@ -23,6 +23,8 @@ except ImportError:
 i2c = I2C(0, scl=Pin(1), sda=Pin(0))
 uart = UART(1, baudrate=9600, tx=Pin(4), rx=Pin(5))
 
+print("I2C Scanning - ",i2c.scan())
+
 imu = IMUGY91(i2c)
 mag = MagnetometerGY273(i2c)
 gps = GPSNEO6M(uart)
